@@ -1,4 +1,4 @@
-const callback = (error, data) => {
+/* const callback = (error, data) => {
     if (error) {
         console.log('error: ', error)
     } else {
@@ -6,7 +6,7 @@ const callback = (error, data) => {
     }
 }
 
-/* const getDataCallback = (callback) => {
+const getDataCallback = (callback) => {
     setTimeout(() => {
         // callback('No se puede acceder al recurso', undefined)
         callback(null, 'Está soleado en Reus')
@@ -18,6 +18,7 @@ getDataCallback(callback)
 
 const getDataPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
+        console.log('hola desde dentro de una promise')
         // reject('No se puede acceder al recurso')
         resolve('Está soleado en Reus')
     }, 3000)
@@ -25,7 +26,7 @@ const getDataPromise = new Promise((resolve, reject) => {
 
 getDataPromise
     .then((data) => { console.log('data desde promise: ', data) })
-    .catch((err) => { console.log('error desde promise: ', err) }) */
+    .catch((err) => { console.log('error desde promise: ', err) })
 
 
 const getDataCallbackDouble = (num, callback) => {
@@ -39,7 +40,7 @@ const getDataCallbackDouble = (num, callback) => {
 }
 
 getDataCallbackDouble(2, callback)
-
+*/
 const getDataPromiseDouble = (num) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -60,7 +61,34 @@ getDataPromiseDouble(2).then((data) => {
     console.log('el error es:', err)
 })
 
+getDataPromiseDouble(2).then((data) => {
+    console.log('el doble es:', data)
+    return getDataPromiseDouble(data)
+}).then((data)=>{console.log(data)}).catch((err) => {
+    console.log('el error es:', err)
+})
 
+/* Promise.then((data)=>{}).then((data)=>{}).then((data)=>{}).catch((error)=>{}) 
+ */
+const doblar = async (num) => {
+    const dato1 = await promise1
+    const dato2 = await promise2
+    const dato3 = await promise3
+
+    
+    if(typeof num !== 'number'){
+        throw new Error('Se debe especificar un número')
+    }
+    return num * 2
+}
+
+doblar(8).then((data)=>{
+    console.log(data)
+    return promise
+}).then((data)=>{
+    return "hola"
+}).then((data)=>{console.log(data)})
+.catch((err)=>{console.log('nos hemos equivocao')})
 
 
 
